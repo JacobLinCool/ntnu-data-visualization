@@ -1,0 +1,66 @@
+name: Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  pages:
+    name: Build Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v2
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: latest
+          run_install: false
+
+      - name: Build D3 HW1
+        run: cd d3-hw1 && pnpm install && pnpm build
+
+      - name: Build D3 HW2
+        run: cd d3-hw2 && pnpm install && pnpm build
+
+      - name: Prepare Artifacts
+        run: |
+          mkdir -p artifacts
+          cp -r d3-hw1/dist artifacts/d3-hw1
+          cp -r d3-hw2/dist artifacts/d3-hw2
+          echo '<html><body><ul>' > artifacts/index.html
+          for dir in artifacts/*; do
+            if [ -d "$dir" ]; then
+              echo "<li><a href=\"${dir##*/}/\">${dir##*/}</a></li>" >> artifacts/index.html
+            fi
+          done
+          echo '</ul></body></html>' >> artifacts/index.html
+
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "docs"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@main

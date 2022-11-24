@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>D3</title>
+    </head>
+    <body>
+        <div id="board"></div>
+        <script type="module" src="src/index.ts"></script>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #board {
+                position: relative;
+                width: 90%;
+                overflow: hidden;
+                aspect-ratio: 1920 / 1080;
+                border: lightblue solid 1px;
+                border-radius: 0.5rem;
+            }
+            #board::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: lightblue solid 1px;
+                background: url("https://avatar.jacoblin.cool/girl-a/random"), pink;
+                background-size: cover;
+                background-attachment: fixed;
+                opacity: 0.15;
+            }
+        </style>
+    </body>
+</html>
