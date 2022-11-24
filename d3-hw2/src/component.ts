@@ -462,8 +462,8 @@ export class BarChart extends Component {
                         const x0 = evt.selection[0];
                         const x1 = evt.selection[1];
 
-                        const lower = x_scale.invert(x0);
-                        const upper = x_scale.invert(x1);
+                        const lower = x_scale.invert(x0 - this.PADDING);
+                        const upper = x_scale.invert(x1 - this.PADDING);
 
                         state.filter[this.type] = [lower, upper];
                         state.selected = null;
