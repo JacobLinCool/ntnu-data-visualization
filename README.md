@@ -8,7 +8,7 @@ Homeworks.
 
 ## SciVis
 
-- [Isocontour](SciVisHW2/isocontour.ipynb)
+- [Isocontour](SciVisHW2/Isocontour.ipynb)
 - [DVR](SciVisHW3/DVR.ipynb)
 - [RK4](SciVisHW4/pathTracing.ipynb)
 
@@ -17,4 +17,4 @@ Homeworks.
 - [D3](d3-hw1)
 - [D3 (Interactive)](d3-hw2)
 
-[Demo](https://jacoblincool.github.io/ntnu-data-visualization/)
+[Demo](https://jacoblincool.github.io/ntnu-data-visualization/d3-hw2/)
